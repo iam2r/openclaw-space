@@ -1,0 +1,28 @@
+name: Keep Codespace Alive
+
+on:
+  schedule:
+    # 每15分钟运行一次，保持 Codespace 活跃
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    # 允许手动触发
+
+jobs:
+  ping-codespace:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Ping Codespace URL
+        run: |
+          echo "Pinging Codespace to keep it alive..."
+          response=$(curl -s -o /dev/null -w "%{http_code}" -L "https://reimagined-space-fortnight-wv5px9xxq6v3gwgv.github.dev/")
+          echo "HTTP Status: $response"
+          
+          if [ "$response" != "000" ] && [ "$response" -ge 200 ] && [ "$response" -lt 400 ]; then
+            echo "✅ Codespace ping successful"
+          else
+            echo "⚠️ Codespace may be stopped or unreachable (HTTP $response)"
+            exit 1
+          fi
