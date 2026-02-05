@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pnpm install && openclaw gateway --verbose"
+    "start": "pnpm install && nohup openclaw gateway --verbose > /tmp/openclaw-gateway.log 2>&1 &",
+    "log": "tail -f /tmp/openclaw-gateway.log"
   },
   "keywords": [],
   "author": "",
