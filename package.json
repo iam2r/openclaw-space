@@ -1,14 +1,45 @@
 {
   "name": "openclaw-space",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "在 GitHub Codespace 中快速部署和运行 OpenClaw。",
+  "type": "module",
+  "main": "server.js",
   "scripts": {
     "start": "pnpm install && nohup openclaw gateway --verbose > /tmp/openclaw-gateway.log 2>&1 &",
-    "log": "tail -f /tmp/openclaw-gateway.log"
+    "log": "tail -f /tmp/openclaw-gateway.log",
+    "dev": "nodemon server.js",
+    "serve": "nodemon server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.23.0"
+  "keywords": [
+    "openclaw",
+    "codespace",
+    "ai",
+    "assistant"
+  ],
+  "author": "iam2r",
+  "license": "MIT",
+  "packageManager": "pnpm@>=10.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iam2r/openclaw-space.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iam2r/openclaw-space/issues"
+  },
+  "homepage": "https://github.com/iam2r/openclaw-space#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  },
+  "nodemonConfig": {
+    "ext": "js,mjs,json",
+    "ignore": [
+      "node_modules/*",
+      ".git/*",
+      "public/*"
+    ],
+    "delay": 1000
+  }
 }
