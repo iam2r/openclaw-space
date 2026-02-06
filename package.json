@@ -18,7 +18,6 @@
   ],
   "author": "iam2r",
   "license": "MIT",
-  "packageManager": "pnpm@>=10.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iam2r/openclaw-space.git"
