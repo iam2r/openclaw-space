@@ -5,8 +5,7 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "pnpm install && nohup openclaw gateway --verbose > /tmp/openclaw-gateway.log 2>&1 &",
-    "log": "tail -f /tmp/openclaw-gateway.log",
+    "start": "pnpm install && openclaw gateway --verbose",
     "dev": "nodemon server.js",
     "serve": "nodemon server.js"
   },
