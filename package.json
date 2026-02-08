@@ -7,7 +7,9 @@
   "scripts": {
     "start": "openclaw gateway --verbose",
     "dev": "nodemon server.js",
-    "serve": "nodemon server.js"
+    "serve": "nodemon server.js",
+    "restart-gateway": "openclaw gateway restart",
+    "run-ocw": "bash ocw.sh"
   },
   "keywords": [
     "openclaw",
