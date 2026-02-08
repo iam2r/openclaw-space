@@ -5,24 +5,32 @@
 # 由 AI 动态写入命令，你只需点击执行
 # ============================================
 
-cd /workspaces/openclaw-space
+# --- 上下文变量 (只修改这里) ---
+WORKDIR="/workspaces/openclaw-space"
+# --- 上下文区域结束 ---
 
-# 动态命令区域
+# --- 核心脚本区域 (只修改这里) ---
+read -r -d '' CORE_SCRIPT << 'EOF'
+cd "$WORKDIR"
 git add -A
-git commit -m "feat: add command bridge scripts for exec bypass
+git commit -m "docs: update MEMORY.md with ocw.sh command bridge
 
-- Add ocw.sh command bridge script
-- Add restart-gateway script to package.json
-- Add run-ocw script for bash execution"
+- Add ocw.sh command bridge script documentation
+- Clarify usage for Codespace + mobile scenarios"
+git push origin main
+EOF
+# --- 核心脚本结束 ---
 
-# 捕获状态和输出
+# --- 通信层 (永远不要修改) ---
+bash -c "$CORE_SCRIPT" > /tmp/ocw_output.txt 2>&1
 EXIT_CODE=$?
-OUTPUT=$(git log --oneline -1 2>&1)
+OUTPUT=$(cat /tmp/ocw_output.txt)
 
-# 输出结果供 AI 读取
-echo "===EXIT_CODE:$EXIT_CODE==="
+echo "===RESULT_START==="
+echo "EXIT_CODE=$EXIT_CODE"
+echo "OUTPUT_LENGTH=${#OUTPUT}"
+echo "===OUTPUT_START==="
 echo "$OUTPUT"
-
-# 写入日志文件供 AI 分析
-echo "===EXIT_CODE:$EXIT_CODE===" > /home/codespace/.openclaw/workspace/ocw.log
-echo "$OUTPUT" >> /home/codespace/.openclaw/workspace/ocw.log
+echo "===OUTPUT_END==="
+echo "===RESULT_END==="
+# --- 通信层结束 ---
